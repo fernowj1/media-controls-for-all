@@ -1,3 +1,11 @@
-# Media Controls For All
+# Media Controls For All!
 
-Add volume controls and music controls to keyboards that don't have dedicated buttons for them.
+Add volume and music controls to keyboards that don't have dedicated buttons for them.
+
+Features:
+* volume up 
+* volume down
+* mute/unmute 
+* next song
+* previous song
+* play/pause
