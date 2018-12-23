@@ -3,8 +3,9 @@
 ; Add hotkeys for volume and media controls to keyboards without dedicated buttons.
 
 ; TODO:
-; improve help format
 ; test Spanish version
+; add Spanish readme (will have to create Spanish logo)
+; improve readme (say it's for Windows only, make videos (linked to YouTube videos), add pictures, add gifs to show how to configure)
 
 #NoEnv ; Avoids checking empty variables to see if they are environment variables (documentation recommends it for all new scripts).
 SetWorkingDir %A_ScriptDir%
@@ -15,7 +16,7 @@ if userLanguage in 040a, 080a, 0c0a, 100a, 140a, 180a, 1c0a, 200a, 240a, 280a, 2
 }
 
 ; add options to tray
-Menu, Tray, NoStandard                    ; default options incompatible, must use custom created options
+Menu, Tray, NoStandard                  ; default options incompatible, must use custom created options
 if isSpanish
 {
   Menu, tray, add, Configurar el login, StartupConfig
@@ -36,15 +37,18 @@ else {
   Menu, Tray, add, Help, OpenHelp
   Menu, tray, add, Exit, Exit
 }
+
 ; main controls
-^+Up::SoundSet +5                       ; Ctrl + Shift + up volume up 10%
-^+Down::SoundSet -5                     ; Ctrl + Shift + down volume down 10%
-^!Left::Media_Prev                      ; Ctrl + Alt + left
-^!Right::Media_Next                     ; Ctrl + Alt + right
-^!PrintScreen::Media_Play_Pause         ; Ctrl + Alt + printscreen
-!DOWN::SoundSet, +1, , mute             ; Toggle the master mute (set it to the opposite state) Alt + down
+^+Up::SoundSet +5                       ; Ctrl + Shift + up -- volume up 10%
+^+Down::SoundSet -5                     ; Ctrl + Shift + down -- volume down 10%
+^!Left::Media_Prev                      ; Ctrl + Alt + left -- previous song
+^!Right::Media_Next                     ; Ctrl + Alt + right -- next song
+^!PrintScreen::Media_Play_Pause         ; Ctrl + Alt + printscreen -- play/pause
+!DOWN::SoundSet, +1, , mute             ; Alt + down -- toggle the master mute
 
 OpenHelp:
+; spacing in this section intentionally obscure in order to manually align text
+; programmatic text alignment not available in this scripting language to the best of my knowledge
 if isSpanish
 {
   Msgbox, , Ayuda,
@@ -57,9 +61,10 @@ if isSpanish
 
     Controles de música:
     Pulsar (al mismo tiempo)...     Para...
-    Ctrl + Alt + Print Screen       tocar/para la música (hay que comenzar a mano la canción de un reproductor de medios (como Spotify) la primera vez la computadora enciende.)
+    Ctrl + Alt + Print Screen       tocar/para la música
     Ctrl + Alt + flecha derecha     tocar la próxmia canción
     Ctrl + Alt + flecha izquierda   tocar la canción anterior
+    (A veces hay que comenzar a mano la canción de un reproductor de medios (como Spotify) la primera vez la computadora o la aplicación enciende.)
 
     Para comenzar esta aplicación automáticamente (después del login), haz clic con el botón derecho del ratón en el icono de la aplicación y haz clic "Configurar el login".
 
@@ -72,51 +77,69 @@ if isSpanish
     con el sujeto "Media Controls For All".
   )
 }
-else {                                ; default to English
+else {                                  ; default to English
   Msgbox, , Help,
-  (
-    Volume controls:
-    Press (at same time)...     To...
-    Ctrl + Shift + up arrow     increase volume 10 percent
-    Ctrl + Shift + down arrow   decrease volume 10 percent
-    Alt + down arrow            mute/unmute sound
+(
+Volume controls:
+Press (at same time)...          To...
+Ctrl + Shift + up arrow        increase volume 10 percent
+Ctrl + Shift + down arrow   decrease volume 10 percent
+Alt + down arrow                 mute/unmute sound
 
-    Music controls:
-    Press (at same time)...     To...
-    Ctrl + Alt + Print Screen   play/pause music (have to start song manually from music player first time PC boots)
-    Ctrl + Alt + right arrow    play next song
-    Ctrl + Alt + left arrow     play previous song
+Music controls:
+Press (at same time)...         To...
+Ctrl + Alt + Print Screen     play/pause music
+Ctrl + Alt + right arrow      play next song
+Ctrl + Alt + left arrow         play previous song
+(Note: may have to start song manually from player first time PC boots or when the application starts to get the hotkeys working.)
 
-    To run this program at log-in, right click on the program's icon and click "Startup settings".
+To run this program at log-in, right click on the program's icon and click "Startup settings". `n
+To quit this program, right click on the program's icon and click Exit. `n
+To uninstall, delete this file: %A_ScriptFullPath% `n
 
-    To quit this program, right click on the program's icon and click Exit.
-
-    To uninstall, delete this file: %A_ScriptFullPath%
-
-    If you have problems, please email me at
-    johnfernow@gmail.com
-    with "Media Controls For All" in the subject line.
-  )
+If you have problems, please email me at johnfernow@gmail.com with "Media Controls For All" in the subject line.
+)
 }
 return
 
 StartupConfig:
-if isSpanish {
-  Msgbox, 35, Startup settings,
-  (
-    ¿Quieres comenzar esta aplicación automáticamente después del login?
-  )
+  if isSpanish
+  {
+    Msgbox, 35, Startup settings,
+    (
+      ¿Quieres comenzar esta aplicación automáticamente después del login?
+    )
+  }
+  else {
+    Msgbox, 35, Startup settings,
+    (
+      Do you want to start this program automatically after login?
+    )
+  }
   IfMsgbox, YES
   {
     IfEqual, A_ScriptDir, %A_Startup%
     {
-      Msgbox, Ya comience automáticamente. Nada cambió.
+      if isSpanish
+      {
+        Msgbox, Ya comience automáticamente. Nada cambió.
+      }
+      else
+      {
+        Msgbox, Program already auto-starts. No changes made.
+      }
       return
     }
     FileMove, %A_ScriptFullPath%, %A_Startup%, 1
     ; can't delete  original file if it's on a different drive
     if ErrorLevel
-      Msgbox, Error: no podemos encontrar el archivo. Por favor, intenta ponerlo en disco primario.
+      if isSpanish
+      {
+        Msgbox, Error: no podemos encontrar el archivo. Por favor, intenta ponerlo en disco primario.
+      }
+      else {
+        Msgbox, Error: file could not be found. Try moving file to your main drive.
+      }
     ; can't simply reload, because not in original location anymore
     ; all of this is so can move to startup, then move out without restarting script manually
     Run, %A_Startup%\%A_ScriptName%
@@ -132,45 +155,15 @@ if isSpanish {
       }
     else
     {
-      Msgbox, Ya no ejecuta automáticamente. Nada cambió.
-    }
-  }
-}
-else {
-  Msgbox, 35, Startup settings,
-  (
-    Do you want to start this program automatically after login?
-  )
-  IfMsgbox, YES
-  {
-    IfEqual, A_ScriptDir, %A_Startup%
-    {
-      Msgbox, Program already auto-starts. No changes made.
-      return
-    }
-    FileMove, %A_ScriptFullPath%, %A_Startup%, 1
-    ; can't delete  original file if it's on a different drive
-    if ErrorLevel
-      Msgbox, Error: file could not be found. Try moving file to your main drive.
-    ; can't simply reload, because not in original location anymore
-    ; all of this is so can move to startup, then move out without restarting script manually
-    Run, %A_Startup%\%A_ScriptName%
-    ExitApp
-  }
-  IfMsgbox, NO
-  {
-    IfEqual, A_ScriptDir, %A_Startup%
+      if isSpanish
       {
-        FileMove, %A_ScriptFullPath%, %A_Desktop%, 1
-        Run, %A_Desktop%\%A_ScriptName%
-        ExitApp
+        Msgbox, Ya no ejecuta automáticamente. Nada cambió.
       }
-    else
-    {
-      Msgbox, Already was not auto-starting. No action taken.
+      else {
+        Msgbox, Already was not auto-starting. No action taken.
+      }
     }
   }
-}
 return
 
 Exit:
