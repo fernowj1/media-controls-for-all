@@ -5,7 +5,6 @@
 ; TODO:
 ; test Spanish version
 ; add Spanish readme (will have to create Spanish logo)
-; improve readme (say it's for Windows only, make videos (linked to YouTube videos), add pictures, add gifs to show how to configure)
 
 #NoEnv ; Avoids checking empty variables to see if they are environment variables (documentation recommends it for all new scripts).
 SetWorkingDir %A_ScriptDir%
@@ -19,20 +18,20 @@ if userLanguage in 040a, 080a, 0c0a, 100a, 140a, 180a, 1c0a, 200a, 240a, 280a, 2
 Menu, Tray, NoStandard                  ; default options incompatible, must use custom created options
 if isSpanish
 {
-  Menu, tray, add, Configurar el login, StartupConfig
+  Menu, tray, add, Configurar el comienzo automático, StartupConfig
   IfEqual, A_ScriptDir, %A_Startup%
      {
-        Menu, tray, ToggleCheck, Configurar el login
+        Menu, tray, ToggleCheck, Configurar el comienzo automático
      }
   Menu, Tray, add, Ayuda, OpenHelp
   Menu, tray, add, Salir, Exit
 }
 ; default to English
 else {
-  Menu, tray, add, Start on log-in configuration, StartupConfig
+  Menu, tray, add, Configure Automatic Startup, StartupConfig
   IfEqual, A_ScriptDir, %A_Startup%
      {
-        Menu, tray, ToggleCheck, Start on log-in configuration
+        Menu, tray, ToggleCheck, Configure Automatic Startup
      }
   Menu, Tray, add, Help, OpenHelp
   Menu, tray, add, Exit, Exit
@@ -52,30 +51,32 @@ OpenHelp:
 if isSpanish
 {
   Msgbox, , Ayuda,
-  (
-    Controles del volumen:
-    Pulsar (al mismo tiempo)...     Para...
-    Ctrl + Mayús + flecha arriba    subir el volumen 10 por ciento
-    Ctrl + Mayús + flecha abajo     bajar el volumen 10 por ciento
-    Alt + flecha abajo              activar/desactivar el silenciamiento
+(
+Controles del volumen:
+Pulsar (al mismo tiempo)...     Para...
+Ctrl + Mayús + flecha arriba    subir el volumen 10 por ciento
+Ctrl + Mayús + flecha abajo     bajar el volumen 10 por ciento
+Alt + flecha abajo              activar/desactivar el silenciamiento
 
-    Controles de música:
-    Pulsar (al mismo tiempo)...     Para...
-    Ctrl + Alt + Print Screen       tocar/para la música
-    Ctrl + Alt + flecha derecha     tocar la próxmia canción
-    Ctrl + Alt + flecha izquierda   tocar la canción anterior
-    (A veces hay que comenzar a mano la canción de un reproductor de medios (como Spotify) la primera vez la computadora o la aplicación enciende.)
+Controles de música:
+Pulsar (al mismo tiempo)...     Para...
+Ctrl + Alt + Print Screen       tocar/para la música
+Ctrl + Alt + flecha derecha     tocar la próxmia canción
+Ctrl + Alt + flecha izquierda   tocar la canción anterior
+(A veces hay que comenzar a mano la canción de un reproductor de medios (como Spotify) la primera vez la computadora o la aplicación enciende.)
 
-    Para comenzar esta aplicación automáticamente (después del login), haz clic con el botón derecho del ratón en el icono de la aplicación y haz clic "Configurar el login".
+Para comenzar esta aplicación automáticamente (después del login), haz clic con el botón derecho del ratón en el icono de la aplicación y haz clic "Configurar el comienzo automático".
 
-    Para salir de esta aplicación, haz clic con el botón derecho del ratón en el icono de la aplicación y haz clic "Salir".
+Para salir de esta aplicación, haz clic con el botón derecho del ratón en el icono de la aplicación y haz clic "Salir".
 
-    Para desinstalar, bora este archivo: %A_ScriptFullPath%
+Para desinstalar, bora este archivo: %A_ScriptFullPath%
 
-    Si tienes problemas, envíame un correo electrónico a
-    johnfernow@gmail.com
-    con el sujeto "Media Controls For All".
-  )
+Si tienes problemas, envíame un correo electrónico a
+johnfernow@gmail.com
+con el sujeto "Media Controls For All".
+
+Creado por John Fernow.
+)
 }
 else {                                  ; default to English
   Msgbox, , Help,
@@ -93,11 +94,13 @@ Ctrl + Alt + right arrow      play next song
 Ctrl + Alt + left arrow         play previous song
 (Note: may have to start song manually from player first time PC boots or when the application starts to get the hotkeys working.)
 
-To run this program at log-in, right click on the program's icon and click "Startup settings". `n
+To run this program at log-in, right click on the program's icon and click "Configure Automatic Startup". `n
 To quit this program, right click on the program's icon and click Exit. `n
 To uninstall, delete this file: %A_ScriptFullPath% `n
 
 If you have problems, please email me at johnfernow@gmail.com with "Media Controls For All" in the subject line.
+
+Created by John Fernow.
 )
 }
 return
