@@ -27,12 +27,10 @@ descargado y ejecutará.
 Add animated SVG of showing how to do this
 -->
 
-El valor por defecto de esta aplicación es acabarse después de cerrar sesión,
-así que necesitarás hacer clic cada vez después de comenzar la sesión para
-utilizar las prestaciones. Si quieres ejecutar esta aplicación automáticamente
-cada vez comienzas sesión, ve al menú de notificaciones y haz clic con el botón
-derecho al logotipo *Controles multimedia para todos* y haz clic "Configurar el
-comienzo automático".
+Cuando ejecuta la primera vez esta aplicación, te pide si quieres comenzarla
+automáticamente después de iniciar sesión. Para cambiar luego tu decisión, ve al
+menú de notificaciones y haz clic con el botón derecho al logotipo *Controles
+multimedia para todos* y haz clic "Configurar el comienzo automático".
 
 <!---
 Add animated SVG of showing how to do this

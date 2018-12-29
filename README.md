@@ -24,9 +24,8 @@ tested. Once downloaded, click on the downloaded file, and it will run.
 Add animated SVG of showing how to do this
 -->
 
-By default, this program will stop running after log-out, and will require you
-to click on it each time you log-in to utilize its features. If you want to run
-this program automatically every time you log-in, go to the Windows tray menu,
+When you run the program, it will prompt you if you want it to automatically
+start or not after log-in. To change this setting, go to the Windows tray menu,
 right click on the *Media Controls for All* logo, and click "Configure Automatic
 Startup".  
 

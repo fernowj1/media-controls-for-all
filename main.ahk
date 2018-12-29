@@ -4,15 +4,23 @@
 
 ; TODO:
 ; test Spanish version
-; consider adding pop-up when application starts the first time asking if they
-;   want to have this program automatically start
 ; consider adding "uninstall" option in system tray that stops autostart,
 ;   deletes the executable file (and any other files created), and stops the program.
-
+; code format: make more functions, use case statements instead of if isSpanish (that way more languages can be added)
+; instead of adding to desktop, add to original file location. Can save that in media_controls_for_all.txt
 
 #NoEnv ; Avoids checking empty variables to see if they are environment variables (documentation recommends it for all new scripts).
 SetWorkingDir %A_ScriptDir%
 userLanguage := languageCode_%A_Language% ; Get the name of the system's default language.
+
+; first-time running prompt
+path := A_ScriptDir "\media_controls_for_all.txt"
+if !FileExist(path) ; check to see if first time running program
+{
+  FileAppend, This file is used to see if this is the first time the program Media Controls for All is running.`n, %path%
+  StartupSettings()
+}
+
 if userLanguage in 040a, 080a, 0c0a, 100a, 140a, 180a, 1c0a, 200a, 240a, 280a, 2c0a, 300a, 340a, 380a, 3c0a, 400a, 440a, 480a, 4c0a, 500a
 {
   isSpanish := true
@@ -110,6 +118,14 @@ Created by John Fernow.
 return
 
 StartupConfig:
+  StartupSettings()
+  return
+
+Exit:
+ExitApp
+
+StartupSettings()
+{
   if isSpanish
   {
     Msgbox, 35, Startup settings,
@@ -138,6 +154,7 @@ StartupConfig:
       return
     }
     FileMove, %A_ScriptFullPath%, %A_Startup%, 1
+    FileMove, %A_ScriptDir%\media_controls_for_all.txt, %A_Startup%, 1
     ; can't delete  original file if it's on a different drive
     if ErrorLevel
       if isSpanish
@@ -157,6 +174,7 @@ StartupConfig:
     IfEqual, A_ScriptDir, %A_Startup%
       {
         FileMove, %A_ScriptFullPath%, %A_Desktop%, 1
+        FileMove, %A_ScriptDir%\media_controls_for_all.txt, %A_Desktop%, 1
         Run, %A_Desktop%\%A_ScriptName%
         ExitApp
       }
@@ -171,7 +189,5 @@ StartupConfig:
       }
     }
   }
-return
-
-Exit:
-ExitApp
+  return
+}
