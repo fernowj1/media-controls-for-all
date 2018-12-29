@@ -1,4 +1,4 @@
-![](images/logo_en.png)
+![](images/logo_en.png)  
 Add volume and music controls to keyboards that don't have dedicated buttons for them.
 
 #### Translations

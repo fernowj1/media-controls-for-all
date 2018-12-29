@@ -1,4 +1,4 @@
-![](images/logo_es.png)
+![](images/logo_es.png)  
 Añade controles de volumen y música a los teclados que no tengan botones dedicados para estas funciones.
 
 #### Traducciones
