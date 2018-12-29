@@ -33,8 +33,7 @@ Startup".
 Add animated SVG of showing how to do this
 -->
 
-To uninstall, go to the same menu again, and click "No". It will stop starting
-the program automatically, and you can then just delete the downloaded file.  
+To uninstall, go to the same menu again, and click "Uninstall". 
 
 ## Development
 If you are interested in modifying this project, you will need to [install the

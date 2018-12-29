@@ -36,8 +36,7 @@ multimedia para todos* y haz clic "Configurar el comienzo automático".
 Add animated SVG of showing how to do this
 -->
 
-Para desintalar, ve al mismo menú y haz clic "No". No comenzará automáticamente
-nada más y puedes borrar el archivo.
+Para desintalar, ve al mismo menú y haz clic "Desintalar".
 
 ## Desarollo
 Si quieres modificar este proyecto, necesitarás [instalar la aplicación
