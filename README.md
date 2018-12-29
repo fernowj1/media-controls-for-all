@@ -1,8 +1,8 @@
-![](images/media_controls_for_all_full_logo.png)
+![](images/logo_en.png)
 Add volume and music controls to keyboards that don't have dedicated buttons for them.
 
 #### Translations
-* Español
+* [Español](README-es.md)
 
 ## Features
 By using hotkeys (pressing combination of keys at same time), this program adds the following features to keyboards without dedicated media buttons.
@@ -35,7 +35,7 @@ Add animated SVG of showing how to do this
 -->
 
 To uninstall, go to the same menu again, and click "No". It will stop starting
-the program automatically.  
+the program automatically, and you can then just delete the downloaded file.  
 
 ## Development
 If you are interested in modifying this project, you will need to [install the

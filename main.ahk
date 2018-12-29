@@ -4,7 +4,11 @@
 
 ; TODO:
 ; test Spanish version
-; add Spanish readme (will have to create Spanish logo)
+; consider adding pop-up when application starts the first time asking if they
+;   want to have this program automatically start
+; consider adding "uninstall" option in system tray that stops autostart,
+;   deletes the executable file (and any other files created), and stops the program.
+
 
 #NoEnv ; Avoids checking empty variables to see if they are environment variables (documentation recommends it for all new scripts).
 SetWorkingDir %A_ScriptDir%
