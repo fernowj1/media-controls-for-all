@@ -1,53 +1,19 @@
+;------------------------------------------------------------------------------
 ; Media Controls for All!
 ; John Fernow (johnfernow@gmail.com)
 ; Add hotkeys for volume and media controls to keyboards without dedicated buttons.
-
+;------------------------------------------------------------------------------
 ; TODO:
 ; test Spanish version
-; code format: make more functions, use case statements instead of if isSpanish (that way more languages can be added)
-; instead of adding to desktop, add to original file location. Can save that in media_controls_for_all.txt
+;------------------------------------------------------------------------------
 
+; setup
 #NoEnv ; Avoids checking empty variables to see if they are environment variables (documentation recommends it for all new scripts).
 SetWorkingDir %A_ScriptDir%
-userLanguage := languageCode_%A_Language% ; Get the name of the system's default language.
-
-if userLanguage in 040a, 080a, 0c0a, 100a, 140a, 180a, 1c0a, 200a, 240a, 280a, 2c0a, 300a, 340a, 380a, 3c0a, 400a, 440a, 480a, 4c0a, 500a
-{
-  isSpanish := true
-}
-
-; add options to tray
-Menu, Tray, NoStandard                  ; default options incompatible, must use custom created options
-if isSpanish
-{
-  Menu, tray, add, Configurar el comienzo automático, StartupConfig
-  Menu, Tray, add, Desintalar, RunUninstall
-  IfEqual, A_ScriptDir, %A_Startup%
-     {
-        Menu, tray, ToggleCheck, Configurar el comienzo automático
-     }
-  Menu, Tray, add, Ayuda, OpenHelp
-  Menu, tray, add, Salir, Exit
-}
-; default to English
-else {
-  Menu, tray, add, Configure Automatic Startup, StartupConfig
-  Menu, Tray, add, Uninstall, RunUninstall
-  IfEqual, A_ScriptDir, %A_Startup%
-     {
-        Menu, tray, ToggleCheck, Configure Automatic Startup
-     }
-  Menu, Tray, add, Help, OpenHelp
-  Menu, tray, add, Exit, Exit
-}
-
-; first-time running prompt
-path := A_ScriptDir "\media_controls_for_all.txt"
-if !FileExist(path) ; check to see if first time running program
-{
-  FileAppend, This file is used to see if this is the first time the program Media Controls for All is running.`n, %path%
-  StartupSettings()
-}
+global userLanguage := getUserLanguage()
+global path := A_ScriptDir "\media_controls_for_all.txt"
+setupTrayMenu()
+initialSetup()
 
 ; main controls
 ^+Up::SoundSet +5                       ; Ctrl + Shift + up -- volume up 10%
@@ -57,10 +23,187 @@ if !FileExist(path) ; check to see if first time running program
 ^!PrintScreen::Media_Play_Pause         ; Ctrl + Alt + printscreen -- play/pause
 !DOWN::SoundSet, +1, , mute             ; Alt + down -- toggle the master mute
 
+getUserLanguage() {
+  languageCode := languageCode_%A_Language% ; Get the name of the system's default language.
+
+  ; Spanish
+  if languageCode in 040a, 080a, 0c0a, 100a, 140a, 180a, 1c0a, 200a, 240a, 280a, 2c0a, 300a, 340a, 380a, 3c0a, 400a, 440a, 480a, 4c0a, 500a
+  {
+    userLanguage := "es"
+  }
+  ; default to English
+  else {
+    userLanguage := "en"
+  }
+
+  return userLanguage
+}
+
+setupTrayMenu() {
+  ;-----------------------------------------------------------------------------
+  ; Adds options to Windows tray menu (also called Notification Area).
+  ;-----------------------------------------------------------------------------
+  Menu, Tray, NoStandard ; default options incompatible, must use custom created options
+  if userLanguage = "es"
+  {
+    Menu, tray, add, Configurar el comienzo automático, StartupConfig
+    Menu, Tray, add, Desintalar, RunUninstall
+    IfEqual, A_ScriptDir, %A_Startup%
+       {
+          Menu, tray, ToggleCheck, Configurar el comienzo automático
+       }
+    Menu, Tray, add, Ayuda, OpenHelp
+    Menu, tray, add, Salir, Exit
+  }
+  ; default to English
+  else {
+    Menu, tray, add, Configure Automatic Startup, StartupConfig
+    Menu, Tray, add, Uninstall, RunUninstall
+    IfEqual, A_ScriptDir, %A_Startup%
+       {
+          Menu, tray, ToggleCheck, Configure Automatic Startup
+       }
+    Menu, Tray, add, Help, OpenHelp
+    Menu, tray, add, Exit, Exit
+  }
+}
+
+StartupSettings() {
+  ;-----------------------------------------------------------------------------
+  ; Configure if program should auto-start after log-in or not.
+  ;-----------------------------------------------------------------------------
+  if userLanguage = "es"
+  {
+    Msgbox, 35, Configurar iniciar automáticamente,
+    (
+      ¿Quieres iniciar esta aplicación automáticamente después del login?
+    )
+  }
+  else {
+    Msgbox, 35, Startup settings,
+    (
+      Do you want to start this program automatically after login?
+    )
+  }
+  IfMsgbox, YES
+  {
+    IfEqual, A_ScriptDir, %A_Startup%
+    {
+      if userLanguage = "es"
+      {
+        Msgbox, Ya comience automáticamente. Nada cambió.
+      }
+      else
+      {
+        Msgbox, Program already auto-starts. No changes made.
+      }
+      return
+    }
+    ; sometimes when compiled AHK is not fully loaded at this point
+    ; to avoid errors, give time for it to load
+    Sleep, 60000
+    FileMove, %path%, %A_Startup%, 1
+    FileMove, %A_ScriptFullPath%, %A_Startup%, 1
+    if ErrorLevel {
+      if userLanguage = "es"
+      {
+        Msgbox,
+        (
+          Error: No podemos mudarse el archivo a la carpeta necesaria para
+          comenzarla automáticamente. Eso probablemente occurió porque el
+          archivo está en una unidad externa (como una memoria USB) o por una
+          política de Directorio Activo o porque no podía cargar en suficiente
+          tiempo. Controles de multimedia para todos continuará ejecutar, pero
+          no iniciará automáticamente.
+        )
+      }
+      else {
+        Msgbox,
+        (
+          Error: Could not move file to startup folder. This is likely either
+          due to it being on an external drive (such as a USB drive), due to an
+          Active Directory policy, or because the program failed to load in time.
+          Media Controls for All will continue to run, but will not start
+          automatically.
+        )
+      }
+      return
+    }
+    Run, %A_Startup%\%A_ScriptName%
+    ExitApp
+  }
+  IfMsgbox, NO
+  {
+    IfEqual, A_ScriptDir, %A_Startup%
+      {
+        FileMove, %A_ScriptFullPath%, %A_Desktop%, 1
+        FileMove, %path%, %A_Desktop%, 1
+        Run, %A_Desktop%\%A_ScriptName%
+        ExitApp
+      }
+  }
+  return
+}
+
+initialSetup() {
+  ;-----------------------------------------------------------------------------
+  ; Calls for pop-up to configure startup settings if this is the first time
+  ; they program is being ran.
+  ;-----------------------------------------------------------------------------
+  if !FileExist(path) ; check to see if first time running program
+  {
+    FileAppend,
+    (
+    This file is used to see if this is the first time the program Media
+    Controls for All is running.
+    ), %path%
+    StartupSettings()
+  }
+}
+
+StartupConfig:
+  StartupSettings()
+  return
+
+Exit:
+  ExitApp
+
+RunUninstall:
+  ;-----------------------------------------------------------------------------
+  ; Program is actually portable, but this deletes all associated files if ran.
+  ;-----------------------------------------------------------------------------
+  if userLanguage = "es"
+  {
+    Msgbox, 35, Desintalar,
+    (
+      ¿Quieres desintalar Controles multimedia para todos?
+    )
+  }
+  else {
+    Msgbox, 35, Uninstall,
+    (
+      Do you want to uninstall Media Controls for All?
+    )
+  }
+  IfMsgbox, YES
+  {
+    FileDelete, %path%
+    ; Windows doesn't allow .exe files to delete themselves directly
+    ; must create batch file to delete the .exe file and itself
+    FileAppend,
+    (
+    del "%A_ScriptFullPath%"
+    del "`%~f0" & exit
+    ), %A_ScriptDir%\del.bat
+    run, %comspec% /c "%A_ScriptDir%\del.bat"
+    ExitApp
+  }
+  return
+
 OpenHelp:
 ; spacing in this section intentionally obscure in order to manually align text
 ; programmatic text alignment not available in this scripting language to the best of my knowledge
-if isSpanish
+if userLanguage = "es"
 {
   Msgbox, , Ayuda,
 (
@@ -116,97 +259,3 @@ Created by John Fernow.
 )
 }
 return
-
-StartupConfig:
-  StartupSettings()
-  return
-
-Exit:
-ExitApp
-
-RunUninstall:
-  if isSpanish
-  {
-    Msgbox, 35, Uninstall settings,
-    (
-      ¿Quieres desintalar Controles multimedia para todos?
-    )
-  }
-  else {
-    Msgbox, 35, Uninstall settings,
-    (
-      Do you want to uninstall Media Controls for All?
-    )
-  }
-  IfMsgbox, YES
-  {
-    FileDelete, %A_ScriptDir%\media_controls_for_all.txt
-    ; Windows doesn't allow .exe files to delete themselves directly
-    ; must create batch file to delete the .exe file and itself
-    FileAppend,
-    (
-    del "%A_ScriptFullPath%"
-    del "`%~f0" & exit
-    ), %A_ScriptDir%\del.bat
-    run, %comspec% /c "%A_ScriptDir%\del.bat"
-    ExitApp
-  }
-  return
-
-
-StartupSettings()
-{
-  if isSpanish
-  {
-    Msgbox, 35, Startup settings,
-    (
-      ¿Quieres comenzar esta aplicación automáticamente después del login?
-    )
-  }
-  else {
-    Msgbox, 35, Startup settings,
-    (
-      Do you want to start this program automatically after login?
-    )
-  }
-  IfMsgbox, YES
-  {
-    IfEqual, A_ScriptDir, %A_Startup%
-    {
-      if isSpanish
-      {
-        Msgbox, Ya comience automáticamente. Nada cambió.
-      }
-      else
-      {
-        Msgbox, Program already auto-starts. No changes made.
-      }
-      return
-    }
-    ; sometimes when compiled AHK is not fully loaded at this point
-    ; to avoid errors, give time for it to load
-    Sleep, 60000
-    FileMove, %A_ScriptDir%\media_controls_for_all.txt, %A_Startup%, 1
-    FileMove, %A_ScriptFullPath%, %A_Startup%, 1
-    ; can't delete  original file if it's on a different drive
-    if ErrorLevel {
-      FileMove, %A_ScriptFullPath%, %A_Startup%, 1
-      if ErrorLevel {
-        Msgbox, Trouble moving file.
-      }
-    }
-    Run, %A_Startup%\%A_ScriptName%
-    ExitApp
-  }
-  IfMsgbox, NO
-  {
-    IfEqual, A_ScriptDir, %A_Startup%
-      {
-        FileMove, %A_ScriptFullPath%, %A_Desktop%, 1
-        FileMove, %A_ScriptDir%\media_controls_for_all.txt, %A_Desktop%, 1
-        Run, %A_Desktop%\%A_ScriptName%
-        ExitApp
-      }
-  }
-  return
-}
