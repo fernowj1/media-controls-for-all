@@ -1,5 +1,5 @@
 ![](images/logo_es.png)  
-Añade controles de volumen y música a los teclados que no tengan botones dedicados para estas funciones.
+Añade controles de volumen y música a los teclados que no tengan botones dedicados para estas prestaciones.
 
 #### Traducciones
 * [English](README.md)
@@ -19,9 +19,7 @@ botones dedicados para multimedia.
 <!---
 Add link to YouTube video of me showing how to download and setup this program
 -->
-Un enlace para descargar esta aplicación será añadido cuando esta aplicación ha
-sido probado completamente. Después de descargarlo, haz clic el archivo
-descargado y ejecutará.
+[Haz clic aquí para descargar *Controles multimedia para todos* para Windows](http://bit.ly/MediaControlsForAllv1).
 
 <!---
 Add animated SVG of showing how to do this
@@ -36,7 +34,17 @@ multimedia para todos* y haz clic "Configurar el comienzo automático".
 Add animated SVG of showing how to do this
 -->
 
+Si te olvidas las teclas aceleradoras, pues ver el menú de "Ayuda" para verlas.
+
+<!---
+Add animated SVG of showing how to do this
+-->
+
 Para desintalar, ve al mismo menú y haz clic "Desintalar".
+
+<!---
+Add animated SVG of showing how to do this
+-->
 
 ## Desarollo
 Si quieres modificar este proyecto, necesitarás [instalar la aplicación

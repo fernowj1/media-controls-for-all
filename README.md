@@ -17,8 +17,7 @@ By using hotkeys (pressing combination of keys at same time), this program adds 
 <!---
 Add link to YouTube video of me showing how to download and setup this program
 -->
-A link to download this program will be added once this program has been fully
-tested. Once downloaded, click on the downloaded file, and it will run.  
+[Click here to download *Media Controls for All* for Windows](http://bit.ly/MediaControlsForAllv1).
 
 <!---
 Add animated SVG of showing how to do this
@@ -33,7 +32,17 @@ Startup".
 Add animated SVG of showing how to do this
 -->
 
-To uninstall, go to the same menu again, and click "Uninstall". 
+If you forget the shortcuts, you can always access the "Help" menu to see them.
+
+<!---
+Add animated SVG of showing how to do this
+-->
+
+To uninstall, go to the same menu again, and click "Uninstall".
+
+<!---
+Add animated SVG of showing how to do this
+-->
 
 ## Development
 If you are interested in modifying this project, you will need to [install the
