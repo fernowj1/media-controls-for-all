@@ -8,7 +8,7 @@
 #NoEnv ; Avoids checking empty variables to see if they are environment variables (documentation recommends it for all new scripts).
 SetWorkingDir %A_ScriptDir%
 global userLanguage := getUserLanguage()
-global path := A_ScriptDir "\media_controls_for_all.txt"
+global path := A_MyDocuments "\Media Controls for All.txt"
 setupTrayMenu()
 initialSetup()
 
@@ -168,7 +168,6 @@ StartupSettings() {
     ; Sometimes when compiled AHK is not fully loaded at this point.
     ; To avoid errors, give time for it to load.
     Sleep, 60000
-    FileMove, %path%, %A_Startup%, 1
     FileMove, %A_ScriptFullPath%, %A_Startup%, 1
     if ErrorLevel {
       if (userLanguage = "es")
@@ -203,7 +202,6 @@ StartupSettings() {
     IfEqual, A_ScriptDir, %A_Startup%
       {
         FileMove, %A_ScriptFullPath%, %A_Desktop%, 1
-        FileMove, %path%, %A_Desktop%, 1
         Run, %A_Desktop%\%A_ScriptName%
         ExitApp
       }
