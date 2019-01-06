@@ -1,4 +1,4 @@
-![](images/logo_es.png)  
+![](images/español/logo_es.png)  
 Añade controles de volumen y música a los teclados que no tengan botones dedicados para estas prestaciones.
 
 #### Traducciones
@@ -20,31 +20,29 @@ botones dedicados para multimedia.
 Add link to YouTube video of me showing how to download and setup this program
 -->
 [Haz clic aquí para descargar *Controles multimedia para todos* para Windows](http://bit.ly/MediaControlsForAllv1).
+Verás un mensaje de advertencia cuando lo ejecutas porque no he comprado un
+certificado. No signífica que la aplicación no es segura, solo signífica que
+no soy editor conocido. La aplicación es gratuita, sin anuncios y no les pido
+para donaciones. Así que gastar dinero para un certificado no tiene sentido
+para mí. Si eres un desarollador, puedes compilar la aplicación por sí mismo
+(puedes ver "Desarollo" debajo) y no verás la advertencia.
 
-<!---
-Add animated SVG of showing how to do this
--->
+![](images/español/GIFs/descargar.gif)
 
 Cuando ejecuta la primera vez esta aplicación, te pide si quieres comenzarla
 automáticamente después de iniciar sesión. Para cambiar luego tu decisión, ve al
 menú de notificaciones y haz clic con el botón derecho al logotipo *Controles
 multimedia para todos* y haz clic "Configurar el comienzo automático".
 
-<!---
-Add animated SVG of showing how to do this
--->
+![](images/español/GIFs/iniciar.gif)
 
 Si te olvidas las teclas aceleradoras, pues ver el menú de "Ayuda" para verlas.
 
-<!---
-Add animated SVG of showing how to do this
--->
+![](images/español/GIFs/ayuda.gif)
 
-Para desintalar, ve al mismo menú y haz clic "Desintalar".
+Para desintalar, ve al mismo menú y haz clic "Desinstalar".
 
-<!---
-Add animated SVG of showing how to do this
--->
+![](images/español/GIFs/desinstalar.gif)
 
 ## Desarollo
 Si quieres modificar este proyecto, necesitarás [instalar la aplicación

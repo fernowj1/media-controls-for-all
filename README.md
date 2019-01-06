@@ -1,4 +1,4 @@
-![](images/logo_en.png)  
+![](images/english/logo_en.png)  
 Add volume and music controls to keyboards that don't have dedicated buttons for them.
 
 #### Translations
@@ -18,31 +18,29 @@ By using hotkeys (pressing combination of keys at same time), this program adds 
 Add link to YouTube video of me showing how to download and setup this program
 -->
 [Click here to download *Media Controls for All* for Windows](http://bit.ly/MediaControlsForAllv1).
+Because I have not purchased a code signing certificate, there will be a warning
+on installing my program. This does not mean the program is insecure, it just
+means I am not a recognized publisher. Since my program is free, without ads,
+and I do not ask for donations, purchasing a certificate did not make sense for
+me. If you are a developer, you can compile the program yourself (see
+the development section) and you will not get the warning.
 
-<!---
-Add animated SVG of showing how to do this
--->
+![](images/english/GIFs/download.gif)
 
 When you run the program, it will prompt you if you want it to automatically
 start or not after log-in. To change this setting, go to the Windows tray menu,
 right click on the *Media Controls for All* logo, and click "Configure Automatic
 Startup".  
 
-<!---
-Add animated SVG of showing how to do this
--->
+![](images/english/GIFs/startup.gif)
 
 If you forget the shortcuts, you can always access the "Help" menu to see them.
 
-<!---
-Add animated SVG of showing how to do this
--->
+![](images/english/GIFs/help.gif)
 
 To uninstall, go to the same menu again, and click "Uninstall".
 
-<!---
-Add animated SVG of showing how to do this
--->
+![](images/english/GIFs/uninstall.gif)
 
 ## Development
 If you are interested in modifying this project, you will need to [install the
