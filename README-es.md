@@ -19,15 +19,13 @@ botones dedicados para multimedia.
 <!---
 Add link to YouTube video of me showing how to download and setup this program
 -->
-[Haz clic aquí para descargar *Controles multimedia para todos* para Windows](http://bit.ly/MediaControlsForAllv1).
+[Haz clic aquí para descargar *Controles multimedia para todos* para Windows](https://github.com/fernowj1/media-controls-for-all/releases/download/v1.0.0/Media.Controls.exe).
 Verás un mensaje de advertencia cuando lo ejecutas porque no he comprado un
 certificado. No signífica que la aplicación no es segura, solo signífica que
 no soy editor conocido. La aplicación es gratuita, sin anuncios y no les pido
 para donaciones. Así que gastar dinero para un certificado no tiene sentido
 para mí. Si eres un desarollador, puedes compilar la aplicación por sí mismo
 (puedes ver "Desarollo" debajo) y no verás la advertencia.
-
-![](images/español/GIFs/descargar.gif)
 
 Cuando ejecuta la primera vez esta aplicación, te pide si quieres comenzarla
 automáticamente después de iniciar sesión. Para cambiar luego tu decisión, ve al
@@ -40,7 +38,7 @@ Si te olvidas las teclas aceleradoras, pues ver el menú de "Ayuda" para verlas.
 
 ![](images/español/GIFs/ayuda.gif)
 
-Para desintalar, ve al mismo menú y haz clic "Desinstalar".
+Para desinstalar, ve al mismo menú y haz clic "Desinstalar".
 
 ![](images/español/GIFs/desinstalar.gif)
 

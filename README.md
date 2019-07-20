@@ -17,15 +17,13 @@ By using hotkeys (pressing combination of keys at same time), this program adds 
 <!---
 Add link to YouTube video of me showing how to download and setup this program
 -->
-[Click here to download *Media Controls for All* for Windows](http://bit.ly/MediaControlsForAllv1).
+[Click here to download *Media Controls for All* for Windows](https://github.com/fernowj1/media-controls-for-all/releases/download/v1.0.0/Media.Controls.exe).
 Because I have not purchased a code signing certificate, there will be a warning
 on installing my program. This does not mean the program is insecure, it just
 means I am not a recognized publisher. Since my program is free, without ads,
 and I do not ask for donations, purchasing a certificate did not make sense for
 me. If you are a developer, you can compile the program yourself (see
 the development section) and you will not get the warning.
-
-![](images/english/GIFs/download.gif)
 
 When you run the program, it will prompt you if you want it to automatically
 start or not after log-in. To change this setting, go to the Windows tray menu,

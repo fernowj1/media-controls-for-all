@@ -113,7 +113,7 @@ setupTrayMenu() {
   if (userLanguage = "es")
   {
     Menu, tray, add, Configurar el comienzo automático, StartupConfig
-    Menu, Tray, add, Desintalar, RunUninstall
+    Menu, Tray, add, Desinstalar, RunUninstall
     IfEqual, A_ScriptDir, %A_Startup%
        {
           Menu, tray, ToggleCheck, Configurar el comienzo automático
@@ -240,9 +240,9 @@ RunUninstall:
   ;-----------------------------------------------------------------------------
   if (userLanguage = "es")
   {
-    Msgbox, 35, Desintalar,
+    Msgbox, 35, Desinstalar,
     (
-      ¿Quieres desintalar Controles Multimedia Para Todos?
+      ¿Quieres desinstalar Controles Multimedia Para Todos?
     )
   }
   else {
@@ -290,7 +290,7 @@ Para comenzar esta aplicación automáticamente (después del login), haz clic c
 
 Para salir de esta aplicación, haz clic con el botón derecho en el icono de la aplicación y haz clic "Salir".
 
-Para desinstalar, haz clic con el botón derecho en el icono de la aplicación y haz clic "Desintalar".
+Para desinstalar, haz clic con el botón derecho en el icono de la aplicación y haz clic "Desinstalar".
 
 Creado por John Fernow.
 )
